@@ -1,0 +1,62 @@
+.form {
+  position: relative;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  &__input {
+    border: 3px solid #a45dcb;
+    padding: 0 30px;
+    background-color: inherit;
+    font-size: 20px;
+    color: white;
+  }
+  &__input,
+  &__submit {
+    width: 440px;
+    height: 100px;
+    margin-bottom: 15px;
+    border-radius: 50px;
+    box-sizing: border-box;
+  }
+  &__submit {
+    background-color: #ffc329;
+    font-size: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+      color: white;
+      border: 3px solid #a45dcb;
+    }
+  }
+}
+
+input::-moz-placeholder {
+  color: #a45dcb;
+}
+
+input::-webkit-input-placeholder {
+  color: #a45dcb;
+}
+
+.disable {
+  background-color: #7fff00;
+}
+
+.PhoneInputInput {
+  background-color: inherit;
+  border: none;
+  font-size: 20px;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .form {
+    align-items: center;
+    &__input,
+    &__submit {
+      width: 90%;
+    }
+  }
+}
