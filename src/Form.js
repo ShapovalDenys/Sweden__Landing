@@ -13,9 +13,15 @@ const Form = () => {
 
   const [name, setName] = useState("");
   const [mail, setMail] = useState("");
-  const [tel, setTel] = useState();
+  const [tel, setTel] = useState("+");
 
-  const [ipInfo, setIpInfo] = useState()
+  const [ipInfo, setIpInfo] = useState();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [errorName, setErrorName] = useState(false);
+  const [errorMail, setErrorMail] = useState(false);
+  const [errorTel, setErrorTel] = useState(false);
 
   const getIP = () => {
     return fetch(`https://ipinfo.io/json`)
@@ -38,37 +44,73 @@ const Form = () => {
   }, [])
 
   const submitForm = (event) => {
-    event.preventDefault()
-    const DATA = JSON.stringify({name: name, mail: mail, tel: tel, ipInfo: ipInfo})
-    console.log(DATA);
+    event.preventDefault();
 
-    axios.post('/send.php', DATA)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    if (name.length < 1) {
+      setErrorName(true)
+    } else if (mail.length < 1) {
+      setErrorMail(true)
+    } else if (tel && tel.length < 2) {
+      setErrorTel(true)
+    } else {
+      setIsLoading(true)
+      const DATA = JSON.stringify({name: name, mail: mail, tel: tel, ipInfo: ipInfo})
+      console.log(DATA);
+
+        axios.post('/send.php', DATA)
+        .then(function (response) {
+          console.log(response)
+          setIsLoading(false);
+          setName("");
+          setMail("");
+          setTel("");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+}
+
+useEffect(() => {
+  if (name.length > 1) {
+    setErrorName(false)
   }
+}, [name])
+
+useEffect(() => {
+  if (mail.length > 1) {
+    setErrorMail(false)
+  }
+}, [mail])
+
+useEffect(() => {
+  if (tel.length > 2) {
+    setErrorTel(false)
+  }
+}, [tel])
 
   return (
   <form className="form">
 
-    <input onChange={(e) => setName(e.target.value)} className="form__input" type="name" name="name" placeholder="Full name" required />
+    <input onChange={(e) => setName(e.target.value)} className={errorName ? "form__input form__input-error" : "form__input"} type="name" name="name" placeholder="Full name" required />
 
-    <input onChange={(e) => setMail(e.target.value)} className="form__input" type="email" name="email" placeholder="Email" required />
+    <input onChange={(e) => setMail(e.target.value)} className={errorMail ? "form__input form__input-error" : "form__input"} type="email" name="email" placeholder="Email" required />
 
     <PhoneInput
       flags={flags}
       international
       defaultCountry="SE"
-      placeholder="Phone number"
       value={tel}
-      className="form__input"
+      className={errorTel ? "form__input form__input-error" : "form__input"}
       onChange={setTel}
     />
 
-    <button onSubmit={submitForm} className={onDisabled ? "form__submit disable" : "form__submit"} type="submit">Sing Up now</button>
+    {isLoading
+    ?
+    <div className="lds-ring loader"><div></div><div></div><div></div><div></div></div>
+    :
+    <button onClick={(event) => submitForm(event)} className={onDisabled ? "form__submit disable" : "form__submit"} type="submit">Sing Up now</button>
+    }
 
   </form>
 );
