@@ -15,6 +15,8 @@ const Form = () => {
   const [mail, setMail] = useState("");
   const [tel, setTel] = useState();
 
+  const [ipInfo, setIpInfo] = useState()
+
   const getIP = () => {
     return fetch(`https://ipinfo.io/json`)
       .then(response => response.json());
@@ -24,7 +26,7 @@ const Form = () => {
     const [info] = await Promise.all(
       [getIP()],
     );
-    console.log(info);
+    setIpInfo(JSON.stringify(info))
   }
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const Form = () => {
 
   const submitForm = (event) => {
     event.preventDefault()
-    const DATA = JSON.stringify({name: name, mail: mail, tel: tel})
+    const DATA = JSON.stringify({name: name, mail: mail, tel: tel, ipInfo: ipInfo})
     console.log(DATA);
 
     axios.post('/send.php', DATA)
