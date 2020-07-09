@@ -84,7 +84,7 @@ useEffect(() => {
 }, [mail])
 
 useEffect(() => {
-  if (tel.length > 2) {
+  if (tel && tel.length > 2) {
     setErrorTel(false)
   }
 }, [tel])
