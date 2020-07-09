@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import 'react-phone-number-input/style.css';
 import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
@@ -12,13 +13,41 @@ const Form = () => {
 
   const [name, setName] = useState("");
   const [mail, setMail] = useState("");
-  const [value, setValue] = useState();
+  const [tel, setTel] = useState();
 
-  console.log(name, mail, value);
+  const getIP = () => {
+    return fetch(`https://ipinfo.io/json`)
+      .then(response => response.json());
+  }
+
+  const loadIpInfo = async () => {
+    const [info] = await Promise.all(
+      [getIP()],
+    );
+    console.log(info);
+  }
 
   useEffect(() => {
-    setOnDisabled(isPossiblePhoneNumber(value))
-  }, [value])
+    setOnDisabled(isPossiblePhoneNumber(tel))
+  }, [tel])
+
+  useEffect(() => {
+    loadIpInfo()
+  }, [])
+
+  const submitForm = (event) => {
+    event.preventDefault()
+    const DATA = JSON.stringify({name: name, mail: mail, tel: tel})
+    console.log(DATA);
+
+    axios.post('/send.php', DATA)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   return (
   <form className="form">
@@ -32,12 +61,12 @@ const Form = () => {
       international
       defaultCountry="US"
       placeholder="Phone number"
-      value={value}
+      value={tel}
       className="form__input"
-      onChange={setValue}
+      onChange={setTel}
     />
 
-    <button className={onDisabled ? "form__submit disable" : "form__submit"} type="submit">Sing Up now</button>
+    <button onClick={submitForm} className={onDisabled ? "form__submit disable" : "form__submit"} type="submit">Sing Up now</button>
 
   </form>
 );
