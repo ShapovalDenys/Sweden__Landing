@@ -61,14 +61,14 @@ const Form = () => {
     <PhoneInput
       flags={flags}
       international
-      defaultCountry="US"
+      defaultCountry="SE"
       placeholder="Phone number"
       value={tel}
       className="form__input"
       onChange={setTel}
     />
 
-    <button onClick={submitForm} className={onDisabled ? "form__submit disable" : "form__submit"} type="submit">Sing Up now</button>
+    <button onSubmit={submitForm} className={onDisabled ? "form__submit disable" : "form__submit"} type="submit">Sing Up now</button>
 
   </form>
 );

@@ -2,14 +2,8 @@
   position: relative;
   margin-top: 80px;
   display: flex;
+  -webkit-flex-direction: column;
   flex-direction: column;
-  &__input {
-    border: 3px solid #a45dcb;
-    padding: 0 30px;
-    background-color: inherit;
-    font-size: 20px;
-    color: white;
-  }
   &__input,
   &__submit {
     width: 440px;
@@ -18,11 +12,24 @@
     border-radius: 50px;
     box-sizing: border-box;
   }
+  &__input {
+    border: 3px solid #a45dcb;
+    padding: 0 30px;
+    background-color: inherit;
+    font-size: 20px;
+    color: white;
+    &:focus {
+      border: 3px solid #ffc329;
+    }
+  }
   &__submit {
     background-color: #ffc329;
     font-size: 25px;
     font-weight: bold;
     text-transform: uppercase;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
     transition: 0.3s;
     cursor: pointer;
     &:hover {
@@ -49,7 +56,7 @@ input::-webkit-input-placeholder {
 }
 
 .PhoneInputCountry {
-  margin-left: 10px;
+  margin-left: 35px;
 }
 
 .PhoneInputInput {
@@ -58,11 +65,15 @@ input::-webkit-input-placeholder {
   border: none;
   font-size: 20px;
   color: white;
-  padding-left: 65px;
-  width: 434px;
-  height: 94px;
+  padding-left: 85px;
+  width: 440px;
+  height: 100px;
   border-radius: 50px;
   box-sizing: border-box;
+  &:focus {
+    border: 3px solid #ffc329;
+    margin-left: -3px;
+  }
 }
 
 input:-webkit-autofill {
@@ -78,5 +89,8 @@ input:-webkit-autofill {
     &__submit {
       width: 90%;
     }
+  }
+  .PhoneInputInput {
+    width: 90%;
   }
 }

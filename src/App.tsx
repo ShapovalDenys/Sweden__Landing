@@ -2,6 +2,7 @@ import React from 'react';
 
 import './App.scss';
 import Form from './Form';
+import Footer from './Footer';
 
 const App = () => (
   <div className="App">
@@ -18,6 +19,8 @@ const App = () => (
       </div>
 
     </section>
+
+    <Footer />
   </div>
 );
 
