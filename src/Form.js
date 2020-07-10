@@ -130,7 +130,7 @@ const onChangeMail = (e) => {
     ?
     <div className="lds-ring loader"><div></div><div></div><div></div><div></div></div>
     :
-    <button onClick={(event) => submitForm(event)} className={onDisabled ? "form__submit disable" : "form__submit"} type="submit">Sing Up now</button>
+    <button onClick={(event) => submitForm(event)} className={onDisabled && correctMail ? "form__submit disable" : "form__submit"} type="submit">Sing Up now</button>
     }
 
   </form>
