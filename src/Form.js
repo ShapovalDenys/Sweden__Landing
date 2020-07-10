@@ -53,7 +53,7 @@ const Form = () => {
       setErrorMail(true)
     } else if (!onDisabled) {
       setErrorTel(true)
-    } else if (errorMail === false && errorTel === false && correctMail === false) {
+    } else if (errorMail === false && errorTel === false && correctMail === true) {
       setErrorTel(false);
       setIsLoading(true);
       const DATA = JSON.stringify({name: name, mail: mail, tel: tel, ipInfo: ipInfo})
@@ -84,11 +84,11 @@ useEffect(() => {
   }
 }, [name])
 
-useEffect(() => {
+/*useEffect(() => {
   if (mail.length > 1) {
     setCorrectMail(false)
   }
-}, [mail])
+}, [mail])*/
 
 useEffect(() => {
   if (!onDisabled) {
@@ -100,6 +100,9 @@ const onChangeMail = (e) => {
   if (mailValidation.test(e.target.value)) {
     setCorrectMail(true)
     setErrorMail(false)
+  } else {
+    setCorrectMail(false)
+    setErrorMail(true)
   }
   setMail(e.target.value)
 }
