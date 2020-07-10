@@ -60,6 +60,10 @@
   .App {
     height: 100%;
   }
+
+  .reg-completed {
+    height: 800px;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -72,5 +76,21 @@
     &__form-text {
       width: 90%;
     }
+  }
+}
+
+.reg-completed {
+  flex-direction: column;
+  justify-content: center;
+  & h2,
+  & h1 {
+    text-align: center;
+    font-size: 36px;
+    color: white;
+    display: block;
+    line-height: 40px;
+  }
+  & h2 {
+    font-size: 30px;
   }
 }

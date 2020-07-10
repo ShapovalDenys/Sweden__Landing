@@ -7,7 +7,7 @@ import flags from 'react-phone-number-input/flags';
 
 import './Form.scss';
 
-const Form = () => {
+const Form = ({ setRegSuccess, regSuccess }) => {
 
   const [onDisabled, setOnDisabled] = useState();
 
@@ -62,6 +62,7 @@ const Form = () => {
         axios.post('/send.php', DATA)
         .then(function (response) {
           console.log(response.json())
+          setRegSuccess(response.json())
           setIsLoading(false);
           setName("");
           setMail("");
@@ -72,9 +73,6 @@ const Form = () => {
         });
     }
 }
-
-console.log(errorMail, errorTel, correctMail);
-
 
 const mailValidation = /^.+@.+\..+$/igm;
 
@@ -125,6 +123,10 @@ const onChangeMail = (e) => {
       className={errorTel ? "form__input form__input-error" : "form__input"}
       onChange={setTel}
     />
+
+    {regSuccess && regSuccess.reason === "phone" ? <span className="error-span error-span-active">This number is registered</span> : ""}
+    {regSuccess && regSuccess.reason === "mail" ? <span className="error-span error-span-active">This mail is registered</span> : ""}
+
 
     {isLoading
     ?

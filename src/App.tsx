@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './App.scss';
 import Form from './Form';
 import Footer from './Footer';
 
-const App = () => (
+const App = () => {
+
+  const [regSuccess, setRegSuccess] = useState<any>();
+
+  if (regSuccess && regSuccess.success === true) {
+    return (
+      <div className="App">
+
+      <section className="main reg-completed">
+
+        <h1>Registration Completed</h1>
+        <h2>We will contact you</h2>
+
+      </section>
+
+    </div>
+    )
+  }
+
+  return (
   <div className="App">
     <section className="main">
 
@@ -15,13 +34,14 @@ const App = () => (
       <div className="main__form">
         <h1 className="main__form-article">Registrera dig nu och  låt din tur göra resten!</h1>
         <img className="main__form-text" src="./img/text.png" alt="text"></img>
-        <Form />
+        <Form setRegSuccess={setRegSuccess} regSuccess={regSuccess}/>
       </div>
 
     </section>
 
     <Footer />
   </div>
-);
+  )
+}
 
 export default App;

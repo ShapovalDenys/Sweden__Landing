@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import './Footer.scss';
+import AbuseForm from './Footer__form/AbuseForm';
+import ContactForm from './Footer__form/ContactForm';
 
 const Footer = () => {
 
@@ -195,20 +197,7 @@ const Footer = () => {
           <p>
             If you have come to securestgains.com as a result of abuse activity (mentioned above or any other which is not) , please complete the form below to report the issue. We carefully examine every abuse report and we take action against the promoters.
           </p>
-          <form className="report-abuse__form">
-
-            <input className="report-abuse__form-input" type="name" name="name" placeholder="Name" required />
-
-            <input className="report-abuse__form-input" type="surname" name="surname" placeholder="Surname" required />
-
-            <input className="report-abuse__form-input" type="email" name="email" placeholder="Email" required />
-
-            <input className="report-abuse__form-input" type="subject" name="subject" placeholder="Subject" required />
-
-            <textarea className="report-abuse__form-input-textarea" type="text" placeholder="Message" required></textarea>
-
-            <button type="submit" className="report-abuse__form-input-button">SEND</button>
-          </form>
+          <AbuseForm />
         </div>
       }
 
@@ -218,21 +207,7 @@ const Footer = () => {
         <p>
           If you have any questions or feedback, you are welcome to contact us by using the form below:
         </p>
-
-        <form className="report-abuse__form">
-
-          <input className="report-abuse__form-input" type="name" name="name" placeholder="Name" required />
-
-          <input className="report-abuse__form-input" type="surname" name="surname" placeholder="Surname" required />
-
-          <input className="report-abuse__form-input" type="email" name="email" placeholder="Email" required />
-
-          <input className="report-abuse__form-input" type="subject" name="subject" placeholder="Subject" required />
-
-          <textarea className="report-abuse__form-input-textarea" type="text" placeholder="Message" required></textarea>
-
-          <button type="submit" className="report-abuse__form-input-button">SEND</button>
-        </form>
+        <ContactForm />
       </div>
       }
 
