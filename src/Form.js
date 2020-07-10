@@ -22,6 +22,7 @@ const Form = () => {
   const [errorName, setErrorName] = useState(false);
   const [errorMail, setErrorMail] = useState(false);
   const [errorTel, setErrorTel] = useState(false);
+  const [correctMail, setCorrectMail] = useState(true);
 
   const getIP = () => {
     return fetch(`https://ipinfo.io/json`)
@@ -52,7 +53,7 @@ const Form = () => {
       setErrorMail(true)
     } else if (!onDisabled) {
       setErrorTel(true)
-    } else {
+    } else if (errorMail === false && errorTel === false && correctMail === false) {
       setErrorTel(false);
       setIsLoading(true);
       const DATA = JSON.stringify({name: name, mail: mail, tel: tel, ipInfo: ipInfo})
@@ -72,6 +73,11 @@ const Form = () => {
     }
 }
 
+console.log(errorMail, errorTel, correctMail);
+
+
+const mailValidation = /^.+@.+\..+$/igm;
+
 useEffect(() => {
   if (name.length > 1) {
     setErrorName(false)
@@ -80,7 +86,7 @@ useEffect(() => {
 
 useEffect(() => {
   if (mail.length > 1) {
-    setErrorMail(false)
+    setCorrectMail(false)
   }
 }, [mail])
 
@@ -90,14 +96,22 @@ useEffect(() => {
   }
 }, [tel])
 
+const onChangeMail = (e) => {
+  if (mailValidation.test(e.target.value)) {
+    setCorrectMail(true)
+    setErrorMail(false)
+  }
+  setMail(e.target.value)
+}
+
   return (
   <form className="form">
 
     <span className={errorName ? "error-span error-span-active" : "error-span"}>Enter name</span>
     <input onChange={(e) => setName(e.target.value)} className={errorName ? "form__input form__input-error" : "form__input"} type="name" name="name" placeholder="Full name" required />
 
-    <span className={errorMail ? "error-span error-span-active" : "error-span"}>Enter mail</span>
-    <input onChange={(e) => setMail(e.target.value)} className={errorMail ? "form__input form__input-error" : "form__input"} type="email" name="email" placeholder="Email" required />
+    <span className={errorMail ? "error-span error-span-active" : "error-span"}>{correctMail ? "Enter mail" : "Enter correct mail"}</span>
+    <input onChange={(e) => onChangeMail(e)} className={errorMail ? "form__input form__input-error" : "form__input"} type="email" name="email" placeholder="Email" required />
 
     <span className={errorTel ? "error-span error-span-active" : "error-span"}>Enter correct phone number</span>
     <PhoneInput
