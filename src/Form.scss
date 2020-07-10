@@ -8,7 +8,7 @@
   &__submit {
     width: 440px;
     height: 100px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     border-radius: 50px;
     box-sizing: border-box;
   }
@@ -23,6 +23,7 @@
     }
   }
   &__submit {
+    margin-top: 14px;
     background-color: #ffc329;
     font-size: 25px;
     font-weight: bold;
@@ -39,15 +40,23 @@
   }
 }
 
+.error-span {
+  font-size: 14px;
+  color: red;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  opacity: 0;
+  &-active {
+    opacity: 1;
+  }
+}
+
 .form__input-error {
   border: 3px solid red;
-  &::-moz-placeholder {
-    color: #ffc329;
-  }
-
-  &::-webkit-input-placeholder {
-    color: #ffc329;
-  }
 }
 
 input::-moz-placeholder {

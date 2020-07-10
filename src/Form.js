@@ -50,16 +50,17 @@ const Form = () => {
       setErrorName(true)
     } else if (mail.length < 1) {
       setErrorMail(true)
-    } else if (tel && tel.length < 2) {
+    } else if (!onDisabled) {
       setErrorTel(true)
     } else {
-      setIsLoading(true)
+      setErrorTel(false);
+      setIsLoading(true);
       const DATA = JSON.stringify({name: name, mail: mail, tel: tel, ipInfo: ipInfo})
       console.log(DATA);
 
         axios.post('/send.php', DATA)
         .then(function (response) {
-          console.log(response)
+          console.log(response.json())
           setIsLoading(false);
           setName("");
           setMail("");
@@ -84,7 +85,7 @@ useEffect(() => {
 }, [mail])
 
 useEffect(() => {
-  if (tel && tel.length > 2) {
+  if (!onDisabled) {
     setErrorTel(false)
   }
 }, [tel])
@@ -92,10 +93,13 @@ useEffect(() => {
   return (
   <form className="form">
 
+    <span className={errorName ? "error-span error-span-active" : "error-span"}>Enter name</span>
     <input onChange={(e) => setName(e.target.value)} className={errorName ? "form__input form__input-error" : "form__input"} type="name" name="name" placeholder="Full name" required />
 
+    <span className={errorMail ? "error-span error-span-active" : "error-span"}>Enter mail</span>
     <input onChange={(e) => setMail(e.target.value)} className={errorMail ? "form__input form__input-error" : "form__input"} type="email" name="email" placeholder="Email" required />
 
+    <span className={errorTel ? "error-span error-span-active" : "error-span"}>Enter correct phone number</span>
     <PhoneInput
       flags={flags}
       international
