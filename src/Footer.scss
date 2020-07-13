@@ -6,12 +6,20 @@
   display: flex;
   justify-content: space-between;
   &__button {
+    cursor: pointer;
     border: none;
     background-color: inherit;
     color: white;
     font-size: 15px;
     text-transform: uppercase;
     margin-right: 10px;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    &:hover {
+      color: #ffc329;
+    }
     &-last {
       margin-right: 0;
     }
@@ -32,7 +40,7 @@
     top: -200%;
     left: calc(50% - 330px);
     max-width: 600px;
-    height: 60%;
+    height: 70%;
     background-color: white;
     -webkit-transition: 0.3s;
     -moz-transition: 0.3s;
