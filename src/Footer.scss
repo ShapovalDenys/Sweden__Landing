@@ -120,6 +120,16 @@
     margin-top: 30px;
     background-color: #a45dcb;
     color: white;
+    cursor: pointer;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    &:hover {
+      color: #a45dcb;
+      background-color: white;
+      border: 1px solid #a45dcb;
+    }
   }
 
   & input::-moz-placeholder {
